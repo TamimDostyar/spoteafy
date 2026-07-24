@@ -3,6 +3,8 @@
 
 Spoteafy is a client and server side YouTube + AI music app that turns natural language requests into song picks. It was originally built in a 7 hour no-AI challenge and includes a real SQLite-backed conversation history.
 
+For your referrence I did this in 4 hours.
+
 ## What it does
 
 - Uses Groq to interpret the user’s prompt and refine the search query.
