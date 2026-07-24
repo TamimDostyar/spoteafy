@@ -1,32 +1,59 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# Spoteafy
 
-Currently, two official plugins are available:
+Spoteafy is a client and server side YouTube + AI music app that turns natural language requests into song picks. It was originally built in a 7 hour no-AI challenge and includes a real SQLite-backed conversation history.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+- Uses Groq to interpret the user’s prompt and refine the search query.
+- Searches YouTube Music results and filters out obvious Shorts.
+- Embeds the selected video directly in the UI.
+- Stores recent conversation history in a local SQLite database.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Requirements
 
-## Expanding the Oxlint configuration
+- Node.js
+- pnpm
+- A Groq API key
+- A YouTube Data API key from Google Cloud Console
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Environment variables
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+Create a `.env` file with the values expected by the backend:
+
+```env
+GROQ_API_KEY=GROQ_API
+YOUTUBE_API=YOUTUBE_API
+GOOGLE_PATH=https://www.googleapis.com/youtube/v3/
+AI_MODEL=GROQ_MODEL
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+![Spoteafy screenshot](src/assets/eg.png)
+## Install
+
+```bash
+pnpm install
+```
+
+## Run locally
+
+Start the Express API in one terminal:
+
+```bash
+pnpm server
+```
+
+Start the Vite frontend in another terminal:
+
+```bash
+pnpm dev
+```
+
+The app will be available at the Vite dev server, and API requests are proxied to the backend on `http://localhost:3001`.
+
+## Notes
+
+- The database is created automatically at `src/database/spoteafy.db`.
+- If the AI request fails, the app falls back to the raw query and still searches YouTube.
+- The UI is a simple chat-style interface where you can type things like “play Bohemian Rhapsody” or describe a mood.
