@@ -5,20 +5,25 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "tsx watch src/server.ts",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
+    "better-sqlite3": "^13.0.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "googleapis": "^173.0.0",
+    "groq-sdk": "^1.4.0",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "ts-sql-query": "^1.68.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
